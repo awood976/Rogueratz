@@ -1,0 +1,58 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://title/Titlescreen.gd" type="Script" id=1]
+[ext_resource path="res://title/Buttons/NewGameButton.tscn" type="PackedScene" id=2]
+[ext_resource path="res://title/Buttons/OptionsButton.tscn" type="PackedScene" id=3]
+[ext_resource path="res://title/Buttons/CreditsButton.tscn" type="PackedScene" id=4]
+
+[node name="Title_screen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 0.966675
+margin_top = 0.966675
+margin_right = 0.966675
+margin_bottom = 0.966675
+script = ExtResource( 1 )
+
+[node name="Menu" type="VBoxContainer" parent="."]
+margin_left = 120.0
+margin_top = 96.0
+margin_right = 950.0
+margin_bottom = 526.0
+
+[node name="Logo" type="TextureRect" parent="Menu"]
+margin_right = 830.0
+stretch_mode = 4
+
+[node name="CenterRow" type="HBoxContainer" parent="Menu"]
+margin_top = 4.0
+margin_right = 830.0
+margin_bottom = 430.0
+size_flags_vertical = 3
+
+[node name="buttons" type="VBoxContainer" parent="Menu/CenterRow"]
+margin_right = 830.0
+margin_bottom = 426.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 20
+alignment = 1
+
+[node name="NewGameButton" parent="Menu/CenterRow/buttons" instance=ExtResource( 2 )]
+margin_top = 118.0
+margin_bottom = 168.0
+rect_min_size = Vector2( 800, 50 )
+scene_to_load = "res://World_Map/Map_Root.tscn"
+
+[node name="OptionsButton" parent="Menu/CenterRow/buttons" instance=ExtResource( 3 )]
+margin_top = 188.0
+margin_bottom = 238.0
+rect_min_size = Vector2( 800, 50 )
+scene_to_load = "res://game/Options.tscn"
+
+[node name="CreditsButton" parent="Menu/CenterRow/buttons" instance=ExtResource( 4 )]
+margin_top = 258.0
+margin_bottom = 308.0
+rect_min_size = Vector2( 800, 50 )
+scene_to_load = "res://game/Credits.tscn"
+
