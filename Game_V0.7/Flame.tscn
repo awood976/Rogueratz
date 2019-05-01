@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0, 0.222222, 0.42963, 0.6, 0.77037, 1 )
@@ -21,7 +21,6 @@ spread = 1.0
 gravity = Vector3( -10, 0, 0 )
 initial_velocity = 15.0
 initial_velocity_random = 0.5
-angular_velocity = 1.0
 orbit_velocity = 0.03
 orbit_velocity_random = 1.0
 linear_accel_curve = SubResource( 4 )
@@ -31,7 +30,11 @@ scale = 0.5
 scale_random = 1.0
 color_ramp = SubResource( 2 )
 
-[node name="Flame" type="Node"]
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 14.9462, 0.895189 )
+
+[node name="Flame" type="KinematicBody2D"]
+scale = Vector2( 3, 3 )
 
 [node name="Sprite" type="Sprite" parent="."]
 
@@ -40,4 +43,8 @@ scale = Vector2( 2, 2 )
 amount = 700
 local_coords = false
 process_material = SubResource( 5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 14.8016, -0.165142 )
+shape = SubResource( 6 )
 

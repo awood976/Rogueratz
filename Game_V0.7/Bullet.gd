@@ -23,7 +23,7 @@ func _process(delta):
 #	position += velocity
 #	print(position)
 
-	position += velocity * delta
+	global_position += velocity * delta
 	#move(delta)
 	if is_on_wall():
 		queue_free()
@@ -31,7 +31,7 @@ func _process(delta):
 		queue_free()
 
 func out_of_bound():
-	return self.position.x > get_viewport().size.x || self.position.x < 0
+	return global_position.x > get_viewport().size.x || global_position.x < 0
 	
 	
 
