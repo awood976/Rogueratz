@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Player/Player.gd" type="Script" id=1]
+[ext_resource path="res://Player/player.png" type="Texture" id=2]
+[ext_resource path="res://Player/gun.png" type="Texture" id=3]
+
+[node name="Player" type="KinematicBody2D"]
+script = ExtResource( 1 )
+max_health = 100
+
+[node name="Body" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2( 0.19371, 0.968555 )
+polygon = PoolVector2Array( -17.3955, -11.0401, -14.8861, 11.5445, -7.35788, 30.9028, 8.05702, 31.2613, 14.5098, 23.7331, 17.0192, 15.1294, 14.8683, 11.1861, 15.5852, -14.9834, 5.9061, -26.0965, -4.48999, -25.3795 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2( 0.5, 0.5 )
+
+[node name="Gun" type="Sprite" parent="."]
+position = Vector2( 8.44452, 15.4495 )
+rotation = -0.112772
+scale = Vector2( 0.0229832, 0.0316055 )
+texture = ExtResource( 3 )
+
+[node name="Position2D" type="Position2D" parent="Gun"]
+position = Vector2( 450, -50 )
+rotation = -1.44925
+
+[node name="GunTimer" type="Timer" parent="Gun"]
+
