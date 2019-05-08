@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Enemy.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/Enemies/enemy.png" type="Texture" id=2]
+[ext_resource path="res://EnemyHealthBar.tscn" type="PackedScene" id=3]
+
+[node name="Enemy" type="KinematicBody2D"]
+position = Vector2( 93.8714, 535.82 )
+collision_layer = 4
+collision_mask = 11
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+max_health = 200
+damage = 20
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0.000923157, 0.0564651 )
+scale = Vector2( 0.0861897, 0.0819117 )
+texture = ExtResource( 2 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -8.90292, -36.8782, -31.2235, -10.9051, -23.6481, -1.70633, -31.4941, 8.98051, -17.6959, 20.7496, -17.8312, 32.1128, -4.57408, 32.7892, 7.73608, 29.5425, 6.38331, 13.1741, 29.9214, 12.2271, 31.1389, -0.353561, 19.5051, -0.759388, 17.6113, -13.3401, 10.9827, -21.0508, 1.24281, -27.003, -3.08604, -33.4963 )
+
+[node name="Area2D" type="Area2D" parent="."]
+editor/display_folded = true
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PoolVector2Array( -9.04864, -37.1761, -31.0987, -11.0677, -23.3879, -1.59837, -31.5045, 9.08847, -18.518, 20.0459, -17.7063, 31.9502, -4.99035, 32.7618, 7.59035, 29.7858, 6.50815, 13.4173, 29.911, 12.1998, 31.399, -0.516159, 19.7652, -0.651436, 17.8576, -13.4692, 11.0957, -21.325, 1.49789, -26.874, -2.99883, -33.4692 )
+
+[node name="EnemyHealthBar" parent="." instance=ExtResource( 3 )]
+scale = Vector2( 5, 4 )
+
+[connection signal="health_changed" from="." to="EnemyHealthBar" method="update_healthbar"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

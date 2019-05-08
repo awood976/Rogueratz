@@ -1,0 +1,51 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://FlyingEnemy.gd" type="Script" id=1]
+[ext_resource path="res://images/Flying_Fire_Monster.png" type="Texture" id=2]
+[ext_resource path="res://EnemyHealthBar.tscn" type="PackedScene" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 197.604
+
+[node name="FlyingEnemy" type="KinematicBody2D"]
+collision_layer = 4
+collision_mask = 11
+script = ExtResource( 1 )
+max_health = 100
+damage = 10
+
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 0.4, 0.4 )
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -33.8909, -26.8642, -32.5733, -5.25554, -18.0797, -0.24865, -24.1406, 18.9883, -11.7552, 27.1574, 10.644, 27.6845, 23.0295, 17.1437, 16.4415, -1.56625, 34.3608, -9.20834, 34.8879, -30.5535, 14.3333, -12.8976, -0.423805, -29.4994, -12.8092, -11.58 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Area2D" type="Area2D" parent="."]
+editor/display_folded = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PoolVector2Array( -34.1454, -28.092, -32.643, -5.12566, -16.9743, -1.90608, -23.6281, 19.5578, -13.1108, 26.8555, 11.358, 27.7141, 22.7338, 16.7675, 15.8654, -1.69144, 34.539, -10.0624, 34.539, -30.6677, 13.9336, -13.9259, -0.661789, -29.3798, -12.6816, -12.2087 )
+
+[node name="EnemyHealthBar" parent="." instance=ExtResource( 3 )]
+position = Vector2( 0, 15 )
+scale = Vector2( 5, 5 )
+
+[node name="DetectRange" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectRange"]
+shape = SubResource( 1 )
+
+[connection signal="health_changed" from="." to="EnemyHealthBar" method="update_healthbar"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="body_entered" from="DetectRange" to="." method="_on_DetectRange_body_entered"]
+[connection signal="body_exited" from="DetectRange" to="." method="_on_DetectRange_body_exited"]

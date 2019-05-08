@@ -1,0 +1,49 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Player.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/Player/Duck/player.png" type="Texture" id=2]
+[ext_resource path="res://HUD.tscn" type="PackedScene" id=3]
+
+[node name="Player" type="KinematicBody2D"]
+position = Vector2( 301.677, 77.2412 )
+collision_layer = 2
+collision_mask = 5
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+max_health = 100
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( -0.872644, -1.09922 )
+scale = Vector2( 0.667511, 0.690981 )
+texture = ExtResource( 2 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2( -0.882093, 0.207551 )
+scale = Vector2( 0.58206, 0.77402 )
+polygon = PoolVector2Array( -3.87338, -23.8966, -16.7648, -12.3273, -16.5444, -0.0969849, -10.5946, 9.59913, -13.0186, 16.9814, -7.78619, 27.6617, 8.8494, 27.6617, 16.18, 22.4906, 16.9226, -15.7551, 7.47549, -24.4475 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+zoom = Vector2( 0.8, 0.8 )
+limit_smoothed = true
+smoothing_enabled = true
+editor_draw_limits = true
+editor_draw_drag_margin = true
+
+[node name="Hurtbox" type="Area2D" parent="."]
+editor/display_folded = true
+collision_layer = 2
+collision_mask = 5
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hurtbox"]
+polygon = PoolVector2Array( -3.2153, -18.3348, -10.5744, -9.45008, -10.4847, -0.206329, -7.07434, 7.15277, -8.42052, 13.0759, -5.45893, 21.4222, 4.23354, 21.4222, 8.54131, 17.5632, 8.70085, 4.48075, 8.90029, -11.8732, 3.24635, -18.8733 )
+
+[node name="GunTimer" type="Timer" parent="."]
+
+[node name="HUD" parent="." instance=ExtResource( 3 )]
+
+[connection signal="health_changed" from="." to="HUD" method="update_healthbar"]
+[connection signal="body_entered" from="Hurtbox" to="." method="_on_Hurtbox_body_entered"]
+[connection signal="timeout" from="GunTimer" to="." method="_on_GunTimer_timeout"]
